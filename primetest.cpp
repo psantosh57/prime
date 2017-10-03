@@ -5,6 +5,7 @@ compile: g++ prime.cpp primetest.cpp
 ==27185== All heap blocks were freed -- no leaks are possible
 -----------------------------------------------------------------*/
 #include "prime.h"
+#include "vld.h"
 
 /*----------------------------------------------------------------
 test
@@ -47,7 +48,21 @@ main
 -----------------------------------------------------------------*/
 int main() {
 	//test();
-	prime p(0, 100);
-	p.number_of_primes(0);
+	prime p(2, 10000);
+	int i = p.number_of_primes(2);
+	cout << "Num of primes are " << i << endl;
+	cout << "Primes are " << endl;
+	for (int k = 0; k < p.number_of_primes(2); ++k) {
+		int p1 = p.get_prime_number(2, k);
+		cout << p1 << " ";
+		//int p2 = p.get_prime_number(j, k);
+		//assert(p1 == p2);
+	}
+
+
+
+
+
+	
 	return 0;
 }
