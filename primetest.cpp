@@ -10,7 +10,7 @@ compile: g++ prime.cpp primetest.cpp
 /*----------------------------------------------------------------
 test
 -----------------------------------------------------------------*/
-/*
+
 void test() {
 	const char* alg_name[] = { "School Method", "Up to prime numbers", "Sieve of Eratosthenes" };
 	const int NUM_ALGORITHM = sizeof(alg_name) / sizeof(char *);
@@ -26,31 +26,37 @@ void test() {
 			cout << "n = " << n[i] << " ";
 			cout << "Algorithm = " << alg_name[j] << " ";
 			cout << "Number of primes = " << p.number_of_primes(j) << " ";
-			cout << "Number of steps = " << p.number_of_steps(j) << endl;
+			//cout << "Number of steps = " << p.number_of_steps(j) << endl;
+#if 0
 			if (j) {
 				/* make sure you have computed same prime numbers in every algorithm */
-/*
+
 				for (int k = 0; k < p.number_of_primes(0); ++k) {
 					int p1 = p.get_prime_number(0, k);
 					int p2 = p.get_prime_number(j, k);
 					assert(p1 == p2);
 				}
 			}
+#endif // 0
 		}
+
+
 		cout << "-----------------------------------------------------" << endl;
 	}
 	cout << "You are GrEat. All Tests Passed\n";
 }
 
-*/
+
 /*----------------------------------------------------------------
 main
 -----------------------------------------------------------------*/
 int main() {
-	//test();
-	prime p(2, 10000);
+	test();
+	/*
+	prime p(2, 100);
 	int i = p.number_of_primes(2);
 	cout << "Num of primes are " << i << endl;
+#if 0
 	cout << "Primes are " << endl;
 	for (int k = 0; k < p.number_of_primes(2); ++k) {
 		int p1 = p.get_prime_number(2, k);
@@ -58,11 +64,13 @@ int main() {
 		//int p2 = p.get_prime_number(j, k);
 		//assert(p1 == p2);
 	}
+#endif // 0
 
 
 
 
 
+*/
 	
 	return 0;
 }

@@ -6,7 +6,7 @@ int prime::number_of_primes(int n) {
 
 	case 0 : {
 
-		cout << "School Method" << endl;
+		//cout << "School Method" << endl;
 
 		_primeArray_1 = new int[_limit];
 
@@ -30,7 +30,7 @@ int prime::number_of_primes(int n) {
 
 	case 1: {
 
-		cout << "Up to prime numbers" << endl;
+		//cout << "Up to prime numbers" << endl;
 
 		_primeArray_2 = new int[_limit];
 		_primeArray_2[0] = 2;
@@ -59,9 +59,8 @@ int prime::number_of_primes(int n) {
 	}
 	case 2: {
 
-		cout << "Sieve of Eratosthenes" << endl;
+		//cout << "Sieve of Eratosthenes" << endl;
 		int* tempArray = new int[_limit];
-		_primeArray_3 = new int[_limit];
 		tempArray[0] = -1;
 		tempArray[1] = -1;
 		for (int i = 2; i < _limit; ++i) {
@@ -71,11 +70,22 @@ int prime::number_of_primes(int n) {
 
 		int index = 0;
 		int count = 0;
+		int arrayCnt = 0;
 
 		for (int i = 2; i < _limit; ++i) {
 
 			strikeOutMultiples(tempArray, i);
 		}
+
+		for (int i = 0; i < _limit; ++i) {
+
+			if (tempArray[i] != -1) {
+
+				arrayCnt++;
+			}
+		}
+
+		_primeArray_3 = new int[arrayCnt];
 
 		for (int k = 0; k < _limit; ++k) {
 
@@ -87,9 +97,9 @@ int prime::number_of_primes(int n) {
 				//cout << _primeArray_3[k] << endl;
 			}
 		}
-		
+
 		delete[] tempArray;
-		return count;
+		return arrayCnt;
 
 	}
 
@@ -113,6 +123,12 @@ bool prime::isPrime(int n) {
 
 	return true;
 
+}
+
+void prime::allocate() {
+
+	_primeArray_1 = new int[_limit];
+	_primeArray_2 = new int[_limit];
 }
 
 void prime::release() {
