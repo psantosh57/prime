@@ -26,17 +26,19 @@ void test() {
 			cout << "n = " << n[i] << " ";
 			cout << "Algorithm = " << alg_name[j] << " ";
 			cout << "Number of primes = " << p.number_of_primes(j) << " ";
-			//cout << "Number of steps = " << p.number_of_steps(j) << endl;
+			cout << "Number of steps = " << p.number_of_steps(j) << endl;
 			
+			/*
 			if (j) {
 				/* make sure you have computed same prime numbers in every algorithm */
-			
+			/*
 				for (int k = 0; k < p.number_of_primes(0); ++k) {
 					int p1 = p.get_prime_number(0, k);
 					int p2 = p.get_prime_number(j, k);
 					assert(p1 == p2);
 				}
 			}
+			*/
 			
 		}
 
@@ -54,13 +56,13 @@ int main() {
 	//test();
 	
 
-	prime p(0, 100);
+	prime p(0, 10);
 	int i = p.number_of_primes(0);
 	cout << "Num of primes are " << i << endl;
 	cout << "Num of steps are " << p.number_of_steps(0) << endl;
 
-#if 0
 
+#if 0
 	cout << "Primes are " << endl;
 	for (int k = 0; k < p.number_of_primes(2); ++k) {
 		int p1 = p.get_prime_number(2, k);

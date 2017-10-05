@@ -14,7 +14,7 @@ int prime::number_of_primes(int n) {
 
 		for (int i = 2; i < _limit; ++i) {
 
-			if (isPrime(i)) {
+			if (isPrime(n, i)) {
 				
 				//cout << i << " is prime!" << endl;
 				//_numPrimesArray[0][1] ++;
@@ -46,7 +46,7 @@ int prime::number_of_primes(int n) {
 
 		for (int i = 3; i < _limit; ++i) {
 
-			if (isPrime_2(i)) {
+			if (isPrime_2(n, i)) {
 
 				//cout << i << " is prime!" << endl;
 				//_numPrimesArray[0][1] ++;
@@ -77,7 +77,7 @@ int prime::number_of_primes(int n) {
 
 		for (int i = 2; i < _limit; ++i) {
 
-			strikeOutMultiples(tempArray, i);
+			strikeOutMultiples(tempArray, i, n);
 		}
 
 		for (int i = 0; i < _limit; ++i) {
@@ -116,11 +116,10 @@ int prime::number_of_primes(int n) {
 
 }
 
-bool prime::isPrime(int n) {
+bool prime::isPrime(int algo, int n) {
 
 	for (int i = 2; i <= sqrt1(n); ++i) {
-		
-		_numSteps[_algo]++;
+		_numSteps[algo]++;
 		
 		if (n % i == 0) {
 
@@ -173,13 +172,13 @@ int prime::get_prime_number(int algoType, int index) {
 
 }
 
-bool prime::isPrime_2(int n) {
+bool prime::isPrime_2(int algo, int n) {
 
 	int index = 0;
 	int sqrt = sqrt1(n);
 	while (_primeArray_2[index] != -1 && _primeArray_2[index] <= sqrt) {
 		//cout << "Modding by " << _primeArray_2[index] << endl;
-		_numSteps[_algo]++;
+		_numSteps[algo]++;
 		if (n % _primeArray_2[index] == 0) {
 
 			return false;
@@ -193,14 +192,14 @@ bool prime::isPrime_2(int n) {
 	return true;
 }
 
-void prime::strikeOutMultiples(int* temp, int n) {
+void prime::strikeOutMultiples(int* temp, int n, int algo) {
 
 	int index = n+n;
 	while (index < _limit) {
 
 		if (temp[index] != -1) {
 			temp[index] = -1;
-			_numSteps[_algo]++;
+			_numSteps[algo]++;
 		}
 		
 		index += n;
