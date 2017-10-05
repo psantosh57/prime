@@ -8,7 +8,7 @@ int prime::number_of_primes(int n) {
 
 		//cout << "School Method" << endl;
 
-		_primeArray_1 = new int[_limit];
+		//_primeArray_1 = new int[_limit];
 
 		int index = -1;
 
@@ -32,7 +32,7 @@ int prime::number_of_primes(int n) {
 
 		//cout << "Up to prime numbers" << endl;
 
-		_primeArray_2 = new int[_limit];
+		//_primeArray_2 = new int[_limit];
 		_primeArray_2[0] = 2;
 		for (int i = 1; i < _limit; ++i) {
 
@@ -85,18 +85,23 @@ int prime::number_of_primes(int n) {
 			}
 		}
 
-		_primeArray_3 = new int[arrayCnt];
+		//_primeArray_3 = new int[arrayCnt];
+
+
+
 
 		for (int k = 0; k < _limit; ++k) {
 
 			if (tempArray[k] != -1) {
 
-				count++;
+				//count++;
 				_primeArray_3[index] = tempArray[k];
 				index++;
 				//cout << _primeArray_3[k] << endl;
 			}
 		}
+
+
 
 		delete[] tempArray;
 		return arrayCnt;
@@ -129,6 +134,7 @@ void prime::allocate() {
 
 	_primeArray_1 = new int[_limit];
 	_primeArray_2 = new int[_limit];
+	_primeArray_3 = new int[_limit];
 }
 
 void prime::release() {
