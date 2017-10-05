@@ -34,10 +34,13 @@ int prime::number_of_primes(int n) {
 
 		//_primeArray_2 = new int[_limit];
 		_primeArray_2[0] = 2;
+#if 0
 		for (int i = 1; i < _limit; ++i) {
 
 			_primeArray_2[i] = -1;
 		}
+#endif // 0
+
 		
 		int index = 0;
 
@@ -115,9 +118,9 @@ int prime::number_of_primes(int n) {
 
 bool prime::isPrime(int n) {
 
-	for (int i = 2; i <= sqrt(n); ++i) {
+	for (int i = 2; i <= sqrt1(n); ++i) {
 		
-		_numSteps++;
+		_numSteps[_algo]++;
 		
 		if (n % i == 0) {
 
@@ -173,8 +176,10 @@ int prime::get_prime_number(int algoType, int index) {
 bool prime::isPrime_2(int n) {
 
 	int index = 0;
-	while (_primeArray_2[index] != -1 && index < _limit) {
-
+	int sqrt = sqrt1(n);
+	while (_primeArray_2[index] != -1 && _primeArray_2[index] <= sqrt) {
+		//cout << "Modding by " << _primeArray_2[index] << endl;
+		_numSteps[_algo]++;
 		if (n % _primeArray_2[index] == 0) {
 
 			return false;
@@ -195,6 +200,7 @@ void prime::strikeOutMultiples(int* temp, int n) {
 
 		if (temp[index] != -1) {
 			temp[index] = -1;
+			_numSteps[_algo]++;
 		}
 		
 		index += n;
@@ -203,3 +209,52 @@ void prime::strikeOutMultiples(int* temp, int n) {
 	
 
 }
+
+double prime::sqrt1(double number)
+{
+	double error = 0.00001; //define the precision of your result
+	double s = number;
+
+	while ((s - number / s) > error) //loop until precision satisfied 
+	{
+		s = (s + number / s) / 2;
+	}
+	return s;
+}
+
+#if 0
+int prime::sqrt2(double n) {
+
+	double low = 0;
+	double high = n;
+
+	int mid = (high - low) / 2;
+
+
+	while (mid*mid != n) {
+		cout << "Mid = " << mid << endl;
+		if (mid*mid < n) {
+
+			high = mid;
+		}
+		else if (mid*mid > n) {
+
+			low = mid;
+		}
+		cout << "Calculating mid with low = " << low << " and high = " << high << endl;
+		mid = (high - low) / 2;
+	}
+
+	return mid;
+
+
+
+}
+#endif // 0
+
+int prime::number_of_steps(int algoType) {
+
+	return _numSteps[algoType];
+}
+
+
