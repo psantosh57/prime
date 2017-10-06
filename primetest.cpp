@@ -32,12 +32,12 @@ void test() {
 				/* make sure you have computed same prime numbers in every algorithm */
 			
 				for (int k = 0; k < p.number_of_primes(0); ++k) {
-					int p1 = p.get_prime_number(0, k);
+					int p1 = p.get_prime_number(0, k);	
 					int p2 = p.get_prime_number(j, k);
 					assert(p1 == p2);
 				}
 			}			
-			
+				
 		}
 
 
@@ -51,8 +51,14 @@ void test() {
 main
 -----------------------------------------------------------------*/
 int main() {
-	//test();
+	test();
+
 #if 0
+	prime p(0, 100000);
+	int i = p.number_of_primes(0);
+	cout << "Ans = " << i << endl;
+
+
 	
 	int i = p.sqrt1(100000);
 	int j = p.sqrt2(100000);
@@ -72,15 +78,33 @@ int main() {
 		//assert(p1 == p2);
 	}
 
-#endif 
+ 
 
 
-	prime p(0, 10);
+	prime p(0, 100000);
 	int i = p.number_of_primes(0);
 	//double ans = p.sqrt2(144);
 	cout << "Ans = " << i << endl;
 
 
 
+	const int n[] = { 10,100,1000,10000,100000,1000000,10000000 };
+	int k1 = sizeof(n) / sizeof(int);
+	for (int i = 0; i < k1; ++i) {
+		prime p(3, n[i]);
+		for (int j = 0; j < 3; ++j) {
+			/* make sure you have computed same prime numbers in every algorithm */
+
+			for (int k = 0; k < p.number_of_primes(0); ++k) {
+				//cout << "Calculating primes for " << n[i] << endl;
+				//int p1 = p.get_prime_number(0, k);
+				//int p2 = p.get_prime_number(j, k);
+				//assert(p1 == p2);
+			}
+		}
+	}
+	
+
+#endif
 	return 0;
 }

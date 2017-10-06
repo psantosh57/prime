@@ -9,17 +9,18 @@ class prime {
 
 public:
 
-	prime(const int algoType, const int maxNum) : _algo(algoType), _limit(maxNum), _numPrimesArray{ {0,0}, {1,0},{2,0} }, _stepArray{ { 0,0 },{ 1,0 },{ 2,0 } }, _numSteps {0}, _primeArray_1(0), _primeArray_2(0), _primeArray_3(0) {
+	prime(const int algoType, const int maxNum) : _algo(algoType), _limit(maxNum), _numSteps{ 0 }, _numPrimes{ 0 }, _primeArray_1(0), _primeArray_2(0), _primeArray_3(0), _called{ false } {
 
-		cout << "In prime constructor" << endl;
+		//cout << "In prime constructor" << endl;
 		allocate();
 			
 	}
 
 	~prime() {
 
-		cout << "In prime destructor" << endl;
+		//cout << "In prime destructor" << endl;
 		release();
+		_called [3] = { false };
 	}
 
 	int number_of_primes(int n);
@@ -38,11 +39,9 @@ private:
 	int* _primeArray_2;
 	int* _primeArray_3;
 	int _numSteps[3];
+	int _numPrimes[3];
+	bool _called[3];
 
-	int _stepArray [3][2];
-	int _numPrimesArray [3][2]; 
-
-	
 	bool isPrime(int algo, int n);
 	bool isPrime_2(int algo, int n);
 	void strikeOutMultiples(int* temp, int n, int algo);

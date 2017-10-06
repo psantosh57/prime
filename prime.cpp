@@ -2,115 +2,150 @@
 
 int prime::number_of_primes(int n) {
 
-	for (int i = 0; i < _algo; ++i) {
-		_numSteps[i] = 0;
-	}
+		for (int i = 0; i < _algo; ++i) {
+			_numSteps[i] = 0;
+		}
 
-	switch (n) {
+		switch (n) {
 
-	case 0 : {
+		case 0: {
 
-		int index = -1;
-
-		for (int i = 2; i < _limit; ++i) {
-
-			if (isPrime(n, i)) {
+			if (!_called[n]) {
 				
-				_primeArray_1[++index] = i;
+				_called[n] = true;
 
+				int index = -1;
+
+				for (int i = 2; i < _limit; ++i) {
+
+					if (isPrime(n, i)) {
+
+						_primeArray_1[++index] = i;
+						_numPrimes[n]++;
+
+					}
+
+				}
+
+				return (index + 1);
+
+			}
+			else {
+
+				return _numPrimes[n];
 			}
 
 		}
 
-		return (index+1);
+		case 1: {
 
-	}
+			if (!_called[n]) {
 
-	case 1: {
+				_called[n] = true;
 
-		//cout << "Up to prime numbers" << endl;
+				//cout << "Up to prime numbers" << endl;
 
-		//_primeArray_2 = new int[_limit];
-		_primeArray_2[0] = 2;
+				//_primeArray_2 = new int[_limit];
+				_primeArray_2[0] = 2;
 #if 0
-		for (int i = 1; i < _limit; ++i) {
+				for (int i = 1; i < _limit; ++i) {
 
-			_primeArray_2[i] = -1;
-		}
+					_primeArray_2[i] = -1;
+				}
 #endif // 0
 
-		
-		int index = 0;
 
-		for (int i = 3; i < _limit; ++i) {
+				int index = 0;
 
-			if (isPrime_2(n, i)) {
+				for (int i = 3; i < _limit; ++i) {
 
-				//cout << i << " is prime!" << endl;
-				//_numPrimesArray[0][1] ++;
-				_primeArray_2[++index] = i;
+					if (isPrime_2(n, i)) {
 
+						//cout << i << " is prime!" << endl;
+						//_numPrimesArray[0][1] ++;
+						_primeArray_2[++index] = i;
+						_numPrimes[n]++;
+
+					}
+
+				}
+
+
+				return (index + 1);
+
+			}
+			else {
+
+				return _numPrimes[n];
+			}
+
+		}
+		case 2: {
+
+			if (!_called[n]) {
+
+				_called[n] = true;
+
+				//cout << "Sieve of Eratosthenes" << endl;
+				int* tempArray = new int[_limit];
+				tempArray[0] = -1;
+				tempArray[1] = -1;
+				for (int i = 2; i < _limit; ++i) {
+					tempArray[i] = i;
+
+				}
+
+				int index = 0;
+				int count = 0;
+				int arrayCnt = 0;
+
+				for (int i = 2; i < _limit; ++i) {
+
+					strikeOutMultiples(tempArray, i, n);
+				}
+
+				for (int i = 0; i < _limit; ++i) {
+
+					if (tempArray[i] != -1) {
+
+						arrayCnt++;
+						_numPrimes[n]++;
+					}
+				}
+
+				//_primeArray_3 = new int[arrayCnt];
+
+
+
+
+				for (int k = 0; k < _limit; ++k) {
+
+					if (tempArray[k] != -1) {
+
+						//count++;
+						_primeArray_3[index] = tempArray[k];
+						index++;
+						//cout << _primeArray_3[k] << endl;
+					}
+				}
+
+
+
+				delete[] tempArray;
+				return arrayCnt;
+
+			}
+			else {
+
+				return _numPrimes[n];
 			}
 
 		}
 
 
-		return (index+1);
-
-	}
-	case 2: {
-
-		//cout << "Sieve of Eratosthenes" << endl;
-		int* tempArray = new int[_limit];
-		tempArray[0] = -1;
-		tempArray[1] = -1;
-		for (int i = 2; i < _limit; ++i) {
-			tempArray[i] = i;
 
 		}
 
-		int index = 0;
-		int count = 0;
-		int arrayCnt = 0;
-
-		for (int i = 2; i < _limit; ++i) {
-
-			strikeOutMultiples(tempArray, i, n);
-		}
-
-		for (int i = 0; i < _limit; ++i) {
-
-			if (tempArray[i] != -1) {
-
-				arrayCnt++;
-			}
-		}
-
-		//_primeArray_3 = new int[arrayCnt];
-
-
-
-
-		for (int k = 0; k < _limit; ++k) {
-
-			if (tempArray[k] != -1) {
-
-				//count++;
-				_primeArray_3[index] = tempArray[k];
-				index++;
-				//cout << _primeArray_3[k] << endl;
-			}
-		}
-
-
-
-		delete[] tempArray;
-		return arrayCnt;
-
-	}
-
-		
-	}
 
 }
 
@@ -176,7 +211,7 @@ bool prime::isPrime_2(int algo, int n) {
 
 	int index = 0;
 	int sqrt = sqrt2(n);
-	while (_primeArray_2[index] != -1 && _primeArray_2[index] <= sqrt) {
+	while (_primeArray_2[index] <= sqrt) {
 		//cout << "Modding by " << _primeArray_2[index] << endl;
 		_numSteps[algo]++;
 		if (n % _primeArray_2[index] == 0) {
@@ -241,7 +276,11 @@ int prime::sqrt2(int n) {
 			mid = low + (high - low) / 2;
 
 			//cout << "Mid = " << mid << endl;
-			if (mid*mid < n) {
+			if (mid*mid == n) {
+
+				return mid;
+			} 
+			else if (mid*mid < n) {
 
 				low = mid+1;
 				ans = mid;
