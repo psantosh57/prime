@@ -116,7 +116,7 @@ int prime::number_of_primes(int n) {
 
 bool prime::isPrime(int algo, int n) {
 
-	int sqrt = sqrt1(n);
+	int sqrt = sqrt2(n);
 
 	for (int i = 2; i <= sqrt; ++i) {
 		_numSteps[algo]++;
@@ -175,7 +175,7 @@ int prime::get_prime_number(int algoType, int index) {
 bool prime::isPrime_2(int algo, int n) {
 
 	int index = 0;
-	int sqrt = sqrt1(n);
+	int sqrt = sqrt2(n);
 	while (_primeArray_2[index] != -1 && _primeArray_2[index] <= sqrt) {
 		//cout << "Modding by " << _primeArray_2[index] << endl;
 		_numSteps[algo]++;
@@ -224,11 +224,11 @@ double prime::sqrt1(double number)
 
 int prime::sqrt2(int n) {
 
-	int low = 1;
-	int high = n;
-	int ans = 0;
+	long low = 1;
+	long high = n;
+	long long ans = 0;
 
-	int mid = (high + low) / 2;
+	long long mid = (high + low) / 2;
 
 	if (mid*mid == n) {
 
