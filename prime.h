@@ -28,7 +28,7 @@ public:
 	void release();
 	void allocate();
 	double sqrt1(double n);
-	int sqrt2(double n);
+	int sqrt2(int n);
 
 private:
 

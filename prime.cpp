@@ -2,13 +2,13 @@
 
 int prime::number_of_primes(int n) {
 
+	for (int i = 0; i < _algo; ++i) {
+		_numSteps[i] = 0;
+	}
+
 	switch (n) {
 
 	case 0 : {
-
-		//cout << "School Method" << endl;
-
-		//_primeArray_1 = new int[_limit];
 
 		int index = -1;
 
@@ -16,8 +16,6 @@ int prime::number_of_primes(int n) {
 
 			if (isPrime(n, i)) {
 				
-				//cout << i << " is prime!" << endl;
-				//_numPrimesArray[0][1] ++;
 				_primeArray_1[++index] = i;
 
 			}
@@ -118,7 +116,9 @@ int prime::number_of_primes(int n) {
 
 bool prime::isPrime(int algo, int n) {
 
-	for (int i = 2; i <= sqrt1(n); ++i) {
+	int sqrt = sqrt1(n);
+
+	for (int i = 2; i <= sqrt; ++i) {
 		_numSteps[algo]++;
 		
 		if (n % i == 0) {
@@ -221,35 +221,44 @@ double prime::sqrt1(double number)
 	return s;
 }
 
-#if 0
-int prime::sqrt2(double n) {
 
-	double low = 0;
-	double high = n;
+int prime::sqrt2(int n) {
 
-	int mid = (high - low) / 2;
+	int low = 1;
+	int high = n;
+	int ans = 0;
 
+	int mid = (high + low) / 2;
 
-	while (mid*mid != n) {
-		cout << "Mid = " << mid << endl;
-		if (mid*mid < n) {
+	if (mid*mid == n) {
 
-			high = mid;
+		return mid;
+	}
+	else {
+
+		while (low <= high) {
+
+			mid = low + (high - low) / 2;
+
+			//cout << "Mid = " << mid << endl;
+			if (mid*mid < n) {
+
+				low = mid+1;
+				ans = mid;
+			}
+			else if (mid*mid > n) {
+
+				high = mid-1;
+			}
+			//cout << "Calculating mid with low = " << low << " and high = " << high << endl;
 		}
-		else if (mid*mid > n) {
 
-			low = mid;
-		}
-		cout << "Calculating mid with low = " << low << " and high = " << high << endl;
-		mid = (high - low) / 2;
+		return ans;
+
 	}
 
-	return mid;
-
-
-
 }
-#endif // 0
+
 
 int prime::number_of_steps(int algoType) {
 

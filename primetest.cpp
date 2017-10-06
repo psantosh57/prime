@@ -14,8 +14,8 @@ test
 void test() {
 	const char* alg_name[] = { "School Method", "Up to prime numbers", "Sieve of Eratosthenes" };
 	const int NUM_ALGORITHM = sizeof(alg_name) / sizeof(char *);
-	const int n[] = { 10,100,1000,10000,100000,1000000 };
-	const int num_prime[] = { 4,25, 168, 1229,9592,78498 };
+	const int n[] = { 10,100,1000,10000,100000,1000000, 10000000 };
+	const int num_prime[] = { 4,25, 168, 1229,9592,78498, 664579 };
 	int k1 = sizeof(n) / sizeof(int);
 	int k2 = sizeof(num_prime) / sizeof(int);
 	assert(k1 == k2);
@@ -27,18 +27,16 @@ void test() {
 			cout << "Algorithm = " << alg_name[j] << " ";
 			cout << "Number of primes = " << p.number_of_primes(j) << " ";
 			cout << "Number of steps = " << p.number_of_steps(j) << endl;
-			
-			/*
+						
 			if (j) {
 				/* make sure you have computed same prime numbers in every algorithm */
-			/*
+			
 				for (int k = 0; k < p.number_of_primes(0); ++k) {
 					int p1 = p.get_prime_number(0, k);
 					int p2 = p.get_prime_number(j, k);
 					assert(p1 == p2);
 				}
-			}
-			*/
+			}			
 			
 		}
 
@@ -53,16 +51,20 @@ void test() {
 main
 -----------------------------------------------------------------*/
 int main() {
-	//test();
-	
-
-	prime p(0, 10);
-	int i = p.number_of_primes(0);
-	cout << "Num of primes are " << i << endl;
-	cout << "Num of steps are " << p.number_of_steps(0) << endl;
-
-
+	test();
 #if 0
+
+	prime p(0, 100000);
+	int i = p.sqrt1(100000);
+	int j = p.sqrt2(100000);
+	cout << "Method 1 = " << i << " method 2 = " << j << endl;
+	//int i = p.number_of_primes(0);
+	//int j = p.number_of_primes(0);
+	//cout << "Num of primes are " << i << endl;
+	//cout << "Num of steps are " << p.number_of_steps(0) << endl;
+
+
+
 	cout << "Primes are " << endl;
 	for (int k = 0; k < p.number_of_primes(2); ++k) {
 		int p1 = p.get_prime_number(2, k);
@@ -73,11 +75,12 @@ int main() {
 
 
 
-	prime p(0, 10000);
+	prime p(0, 10);
 	//int i = p.number_of_primes(1);
-	//double ans = p.sqrt2(9);
-	//cout << "Ans = " << ans << endl;
+	double ans = p.sqrt2(144);
+	cout << "Ans = " << ans << endl;
 
 #endif // 0
+
 	return 0;
 }
